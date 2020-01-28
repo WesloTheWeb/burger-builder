@@ -3,6 +3,7 @@ import classes from './Burger.module.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
 const burger = (props) => {
+    // Logic behind our ingredients type and quanity.
     const transformedIngredients = Object.keys(props.ingredients)
         .map(igKey => {
             return [...Array(props.ingredients[igKey])].map((_, i) => {
@@ -10,6 +11,7 @@ const burger = (props) => {
             });
         });
 
+    // This renders the GUI of the actual burger
     return (
         <div className={classes.Burger}>
             <BurgerIngredient type="bread-top" />
