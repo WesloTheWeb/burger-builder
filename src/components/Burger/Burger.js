@@ -2,6 +2,9 @@ import React from 'react';
 import classes from './Burger.module.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
+// CSS Destructuring
+const {promptUser} = classes;
+
 const burger = (props) => {
     // Logic behind our ingredients type and quanity.
     let transformedIngredients = Object.keys(props.ingredients)
@@ -14,7 +17,7 @@ const burger = (props) => {
             return arr.concat(el)
         }, []);
         if ( transformedIngredients.length === 0 ) {
-            transformedIngredients = <p>Please start adding Ingredients</p>
+            transformedIngredients = <p className={promptUser}>Please start adding Ingredients</p>
         }
 
     // This renders the GUI of the actual burger
