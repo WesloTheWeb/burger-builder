@@ -10,10 +10,10 @@ BuildControl component.
 to add more labels simply edit the array and add a new object. It is rendered dynamically.
 */
 const controls = [
-    { label: 'Lettuce', type: 'lettuce' },
-    { label: 'Bacon', type: 'bacon' },
-    { label: 'Cheese', type: 'cheese' },
-    { label: 'Meat', type: 'meat' },
+    { label: 'Lettuce ($0.50)', type: 'lettuce' },
+    { label: 'Bacon ($0.70)', type: 'bacon' },
+    { label: 'Cheese ($0.40)', type: 'cheese' },
+    { label: 'Meat ($1.30)', type: 'meat' },
 ];
 
 

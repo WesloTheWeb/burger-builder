@@ -36,21 +36,25 @@
 }
 
 .BuildControl .Less {  
-    background-color: #D39952;
+    /* background-color: #D39952; */
+    background-color: darkred;
     color: white;
 }
 
 .BuildControl .More {
-    background-color: #8F5E1E;
+    /* background-color: #8F5E1E; */
+    background-color: darkgreen;
     color: white;
 }
 
 .BuildControl .Less:hover, .BuildControl .Less:active {  
-    background-color: #DAA972;
+    /* background-color: #DAA972; */
+    background-color: red;
     color: white;
 }
 
 .BuildControl .More:hover,.BuildControl .More:active {
-    background-color: #99703F;
+    /* background-color: #99703F; */
+    background-color: limegreen;
     color: white;
 }
