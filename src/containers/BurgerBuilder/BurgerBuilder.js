@@ -18,16 +18,22 @@ const INGREDIENT_PRICES = {
 class BurgerBuilder extends Component {
 
     state = {
-        ingredients: {
-            lettuce: 0,
-            bacon: 0,
-            cheese: 0,
-            meat: 0
-        },
+        ingredients: null,
         totalPrice: 4,
         purchasable: false,
         purchasing: false,
-        loading: false
+        loading: false,
+        error: false
+    }
+
+    componentDidMount() {
+        axios.get('https://react-burger-builder-86acb.firebaseio.com/ingredients.json')
+            .then(response => {
+                this.setState({ ingredients: response.data });
+            })
+            .catch(error => {
+                this.setState({error: true})
+            });
     }
 
     updatePurchaseState(ingredients) {
@@ -83,7 +89,7 @@ class BurgerBuilder extends Component {
 
     purchaseContinueHandler = () => {
         // alert('You continue!');
-        this.setState({loading: true});
+        this.setState({ loading: true });
         const order = {
             ingredients: this.state.ingredients,
             price: this.state.totalPrice,
@@ -100,11 +106,11 @@ class BurgerBuilder extends Component {
         }
         axios.post('/orders.json', order)
             .then(response => {
-                this.setState({loading:false, purchasing: false});
+                this.setState({ loading: false, purchasing: false });
             })
             .catch(error => {
-                this.setState({loading:false, purchasing: false});
-            } );
+                this.setState({ loading: false, purchasing: false });
+            });
     }
 
     render() {
@@ -115,32 +121,43 @@ class BurgerBuilder extends Component {
             disabledInfo[key] = disabledInfo[key] <= 0 // updates to true or false
         }
 
-        let orderSummary = <OrderSummary
-            ingredients={this.state.ingredients}
-            price={this.state.totalPrice}
-            purchaseCanceled={this.purchaseCancelHandler}
-            purchaseContinue={this.purchaseContinueHandler}
-        />;
+        // ORDER SUMMARY
+        let orderSummary = null;
+
+        // Setting up our Burger
+        let burger = this.state.error ? <p style={{color:'red', fontWeight:'bold', textAlign:'center'}}>Ingredients cannot be loaded.</p> : <Spinner />
+        if (this.state.ingredients) {
+            burger = (
+                <>
+                    <Burger ingredients={this.state.ingredients} />
+                    <BuildControls
+                        ingredientRemoved={this.removeIngredientHandler}
+                        ingredientAdded={this.addIngredientHandler}
+                        disabled={disabledInfo}
+                        purchasable={this.state.purchasable}
+                        price={this.state.totalPrice}
+                        ordered={this.purchaseHandler} />
+                </>
+            );
+            orderSummary = <OrderSummary
+                ingredients={this.state.ingredients}
+                price={this.state.totalPrice}
+                purchaseCanceled={this.purchaseCancelHandler}
+                purchaseContinue={this.purchaseContinueHandler} />;
+        }
         if (this.state.loading) {
             orderSummary = <Spinner />;
         }
+
 
         return (
             <Auxillary>
                 <Modal
                     show={this.state.purchasing}
                     modalClosed={this.purchaseCancelHandler}>
-                        {orderSummary}
+                    {orderSummary}
                 </Modal>
-                <Burger ingredients={this.state.ingredients} />
-                <BuildControls
-                    ingredientRemoved={this.removeIngredientHandler}
-                    ingredientAdded={this.addIngredientHandler}
-                    disabled={disabledInfo}
-                    purchasable={this.state.purchasable}
-                    price={this.state.totalPrice}
-                    ordered={this.purchaseHandler}
-                />
+                {burger}
             </Auxillary>
         );
     }
