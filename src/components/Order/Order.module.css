@@ -9,8 +9,9 @@
 
 .ingredientProperty {
     text-transform: capitalize;
+    font-weight: bold;
     display: inline-block;
-    margin: 0, 8px;
+    margin: 0 .5em;
     border: 1px solid #ccc;
     padding: 5px;
 }
