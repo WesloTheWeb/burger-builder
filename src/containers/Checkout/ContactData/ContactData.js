@@ -18,14 +18,6 @@ class ContactData extends Component {
                 },
                 value: ''
             },
-            email: {
-                elementType: 'input',
-                elementConfig: {
-                    type: 'text',
-                    placeholder: 'Street'
-                },
-                value: ''
-            },
             zipCode: {
                 elementType: 'input',
                 elementConfig: {
@@ -91,13 +83,51 @@ class ContactData extends Component {
             });
     }
 
+    inputChangedHandler = (event, inputIdentifier) => {
+        // Start of our 2 way Binding
+
+        // Step 1: create clone of state
+        const updatedOrderForm = {
+            ...this.state.orderForm
+        }
+
+        // Step 2:
+        const updatedFormElement = {
+            ...updatedOrderForm[inputIdentifier] 
+        };
+
+        /* Step 3: Implement our event.target.value for 2-way binding. */
+        updatedFormElement.value = event.target.value;
+        updatedOrderForm[inputIdentifier] = updatedFormElement;
+
+        // Step 4: Finally set the state equal to our new state
+        this.setState({orderForm: updatedOrderForm});
+    }
+
     render() {
+        /* This creates an empty array in which gets iterated through our orderForm object. 
+        Values in our orderForm object in key-value pairs will be pushed into a new array, formElementsArray
+        This step "converts" our object into an array, which we can loop through with .map().
+        
+        Also remember that the config is everything to the right of the key identifier from orderForms*/
+        const formElementsArray = [];
+        for (let key in this.state.orderForm) {
+            formElementsArray.push({
+                id: key,
+                config: this.state.orderForm[key]
+            })
+        }
+
         let form = (
             <form>
-                <Input elementType="..." elementConfig="..." value="..." />
-                <Input inputtype="input" type="email" name="email" placeholder="Your email" />
-                <Input inputtype="input" type="text" name="street" placeholder="Street" />
-                <Input inputtype="input" type="text" name="postal" placeholder="Postal Code" />
+                 {formElementsArray.map(formElement => (
+                     <Input 
+                        key={formElement.id}
+                        elementType={formElement.config.elementType}
+                        elementConfig={formElement.config.elementConfig}
+                        value={formElement.config.value}
+                        changed={(event) => this.inputChangedHandler(event, formElement.id)} />
+                 ))}   
                 <Button btnType="Success"
                     clicked={this.orderHandler}>Order</Button>
             </form>
