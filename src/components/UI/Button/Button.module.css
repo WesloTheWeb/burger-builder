@@ -9,6 +9,7 @@
     padding: 10px;
     margin: 10px;
     font-weight: bold;
+    text-transform: uppercase;
 }
 
 .Button:first-of-type {
@@ -18,6 +19,7 @@
 
 .Button:disabled {
     color: #ccc;
+    background: darkgrey;
     cursor: not-allowed;
 }
 
@@ -27,6 +29,11 @@
 
 .Success {
     color: #5C9210;
+}
+
+.placeOrder {
+    color: #fff;
+    background-color: #074CB3;
 }
 
 .Danger {
