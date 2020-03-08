@@ -174,7 +174,7 @@ class ContactData extends Component {
         }
 
         // Step 4: Finally set the state equal to our new state
-        this.setState({ orderForm: updatedOrderForm });
+        this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid});
     }
 
     render() {

@@ -7,6 +7,7 @@ const input = (props) => {
     let inputElement = null;
     const inputClasses = [classes.InputElement];
 
+    // Dynamic styling to check if invalid and if touched
     if (props.invalid && props.shouldValidate && props.touched) {
         inputClasses.push(Invalid);
     }

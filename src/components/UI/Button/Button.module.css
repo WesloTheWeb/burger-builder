@@ -16,6 +16,11 @@
     /* padding-left: 0; */
 }
 
+.Button:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
 .Button:hover {
     background-color: lightblue;
 }
