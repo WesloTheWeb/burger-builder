@@ -10,7 +10,7 @@
     margin-bottom: 8px;
 }
 
-.InputElementProp {
+.InputElement {
     display: block;
     width: 100%;
     outline: none;
@@ -24,4 +24,9 @@
 .InputElement:focus {
     outline: none;
     background-color: #ccc;
+}
+
+.Invalid {
+    border: 1px solid red;
+    background-color: #FDA49A;
 }
