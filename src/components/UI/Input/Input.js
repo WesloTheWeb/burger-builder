@@ -1,11 +1,20 @@
 import React from 'react';
 import classes from './Input.module.css';
 
-const { Input, Label, Invalid } = classes;
+const { Input, Label, Invalid, errorMsg } = classes;
 
 const input = (props) => {
     let inputElement = null;
     const inputClasses = [classes.InputElement];
+
+    let validationError = null;
+    // If its invalid and is currently "touched"
+    if (props.invalid && props.touched) {
+        validationError = <p className={errorMsg}>Please enter {props.shouldValidate.validationText}!</p>;
+        /* This checks the shouldValidate and the validation Text property
+        Remember shouldValidate refers to formElement.config.validation in contactData.js
+        */
+    }
 
     // Dynamic styling to check if invalid and if touched
     if (props.invalid && props.shouldValidate && props.touched) {
@@ -53,6 +62,7 @@ const input = (props) => {
         <div className={Input}>
             <label className={Label}>{props.label}</label>
             {inputElement}
+            {validationError}
         </div>
     );
 };

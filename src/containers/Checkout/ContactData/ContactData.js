@@ -18,7 +18,8 @@ class ContactData extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    validationText: 'a name'
                 },
                 valid: false,
                 touched: false
@@ -31,7 +32,8 @@ class ContactData extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    validationText: 'a street'
                 },
                 valid: false,
                 touched: false
@@ -47,7 +49,8 @@ class ContactData extends Component {
                     required: true,
                     minLength: 5,
                     maxLength: 5,
-                    isNumeric: true
+                    isNumeric: true,
+                    validationText: 'a zipcode'
                 },
                 valid: false,
                 touched: false
@@ -74,7 +77,8 @@ class ContactData extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    isEmail: true
+                    isEmail: true,
+                    validationText: 'a valid email'
                 },
                 valid: false,
                 touched: false
