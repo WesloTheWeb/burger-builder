@@ -16,11 +16,7 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Your Name'
                 },
-                value: '',
-                validation: {
-                    required: true
-                },
-                valid: false
+                value: ''
             },
             zipCode: {
                 elementType: 'input',
@@ -28,13 +24,7 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: 'ZIP Code'
                 },
-                value: '',
-                validation: {
-                    required: true,
-                    minLength: 5,
-                    maxLength: 5
-                },
-                valid: false
+                value: ''
             },
             country: {
                 elementType: 'input',
@@ -42,11 +32,7 @@ class ContactData extends Component {
                     type: 'text',
                     placeholder: 'Country'
                 },
-                value: '',
-                validation: {
-                    required: true
-                },
-                valid: false
+                value: ''
             },
             email: {
                 elementType: 'input',
@@ -54,11 +40,7 @@ class ContactData extends Component {
                     type: 'email',
                     placeholder: 'Your E-mail'
                 },
-                value: '',
-                validation: {
-                    required: true
-                },
-                valid: false
+                value: ''
             },
             deliveryMethod: {
                 elementType: 'select',
@@ -74,43 +56,22 @@ class ContactData extends Component {
         loading: false
     }
 
-    checkValidation(value, rules) {
-        let isValid = true;
-
-        /* isValid is updated to true or false depending on the check:
-        so this is saying if rules.required is true (from our object above)
-        then the isValid variable is updated to true or false,
-        depending on if the trim value is UNEQUAL to an EMPTY STRINGg.
-        
-        If it is true (not equal to empty string), isValid will be true*/
-        if ( rules.required) {
-            isValid = value.trim() !== '' && isValid;
-        }
-
-        if (rules.minLength) {
-            isValid = value.length >= rules.minLength && isValid;
-        }
-
-        if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid;
-        }
-
-        return isValid; // returns true or false
-    }
-
     orderHandler = (event) => {
-        // Use prevent default to prevent reloading the page!
         event.preventDefault();
         this.setState({ loading: true });
-        const formData = {};
-        for ( let formElementIdentifier in this.state.orderForm) {
-            formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
-            // This creates key value pairs. I.e property Name = to the value user enter.
-        }
         const order = {
             ingredients: this.props.ingredients,
             price: this.props.price,
-            orderData: formData
+            customer: {
+                name: 'Wesley Webster',
+                address: {
+                    street: 'Sesame Street 123',
+                    zipCode: '12345',
+                    country: 'Germany'
+                },
+                email: 'uwu@owo.com'
+            },
+            deliveryMethod: 'fastest'
         }
         axios.post('/orders.json', order)
             .then(response => {
@@ -137,9 +98,6 @@ class ContactData extends Component {
 
         /* Step 3: Implement our event.target.value for 2-way binding. */
         updatedFormElement.value = event.target.value;
-        updatedFormElement.valid = this.checkValidation(updatedFormElement.value, updatedFormElement.validation ) 
-        console.log(updatedFormElement);
-        // This passes in our value (true / false) and our valiidation rules
         updatedOrderForm[inputIdentifier] = updatedFormElement;
 
         // Step 4: Finally set the state equal to our new state
@@ -161,7 +119,7 @@ class ContactData extends Component {
         }
 
         let form = (
-            <form onSubmit={this.orderHandler}> 
+            <form>
                  {formElementsArray.map(formElement => (
                      <Input 
                         key={formElement.id}
@@ -170,7 +128,8 @@ class ContactData extends Component {
                         value={formElement.config.value}
                         changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                  ))}   
-                <Button btnType="Success">Order</Button>
+                <Button btnType="Success"
+                    clicked={this.orderHandler}>Order</Button>
             </form>
         );
         if (this.state.loading) {
