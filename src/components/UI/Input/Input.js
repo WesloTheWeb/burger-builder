@@ -21,6 +21,7 @@ const input = (props) => {
         inputClasses.push(Invalid);
     }
 
+    // Switch case for our input. Deals with each type of form i.e input, textarea and select.
     switch (props.elementType) {
         case ('input'):
             inputElement = <input
