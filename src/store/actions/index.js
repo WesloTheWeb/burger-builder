@@ -6,7 +6,8 @@ allows us to centralize them and export
 
 export {
     addIngredient,
-    removeIngredient
+    removeIngredient,
+    initIngredients
 } from './burgerBuilder';
 
 export {} from './order';
