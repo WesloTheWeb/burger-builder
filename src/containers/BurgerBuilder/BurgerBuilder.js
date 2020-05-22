@@ -8,28 +8,19 @@ import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
+import * as BurgerBuilderActions from '../../store/actions/index';
 import axios from '../../axios-orders';
-import * as actionTypes from '../../store/actions';
 
- 
+
 
 class BurgerBuilder extends Component {
 
     state = {
         purchasing: false,
-        loading: false,
-        error: false
     }
 
     componentDidMount() {
         console.log(this.props);
-        // axios.get('https://react-burger-builder-86acb.firebaseio.com/ingredients.json')
-        //     .then(response => {
-        //         this.setState({ ingredients: response.data });
-        //     })
-        //     .catch(error => {
-        //         this.setState({ error: true })
-        //     });
     }
 
     updatePurchaseState(ingredients) {
@@ -40,7 +31,7 @@ class BurgerBuilder extends Component {
             .reduce((sum, el) => {
                 return sum + el;
             }, 0);
-        return sum > 0 ;
+        return sum > 0;
     }
 
     purchaseHandler = () => {
@@ -52,7 +43,7 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        this.props.history.push('/checkout');        
+        this.props.history.push('/checkout');
     }
 
     render() {
@@ -117,8 +108,8 @@ const mapStateToProps = state => {
 // Collection of functions for our actions
 const mapDispatchToProps = dispatch => {
     return {
-        onIngredientAdded: (ingName) => dispatch({type: actionTypes.ADD_INGREDIENTS, ingredientName: ingName }),
-        onIngredientRemoved: (ingName) => dispatch({type: actionTypes.REMOVE_INGREDIENTS, ingredientName: ingName })
+        onIngredientAdded: (ingName) => dispatch(BurgerBuilderActions.addIngredient(ingName)),
+        onIngredientRemoved: (ingName) => dispatch(BurgerBuilderActions.removeIngredient(ingName))
     };
 }
 

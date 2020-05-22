@@ -101,6 +101,7 @@ class ContactData extends Component {
         formIsValid: false,
         loading: false
     }
+    
     checkValidation(value, rules) {
         let isValid = true;
         if (!rules) {
@@ -232,4 +233,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(withRouter)(ContactData);
+export default connect(mapStateToProps)(withRouter(ContactData));
