@@ -1,7 +1,7 @@
 /*
 We need to add this layer of exporting because in our
 action creator, we have separate export statements, this
-allows us to centralize them and export
+allows us to centralize them and export. The exports are functions.
 */
 
 export {
@@ -10,4 +10,8 @@ export {
     initIngredients
 } from './burgerBuilder';
 
-export {} from './order';
+export {
+    purchaseBurger,
+    purchaseInit,
+    fetchOrders
+} from './order';
