@@ -129,7 +129,7 @@ class Auth extends Component {
                 </form>
                 <Button
                     clicked={this.switchAuthModeHandler}
-                    btnType="Danger">Switch to {this.state.isSignup ? 'Sign in' : 'Sign out'}
+                    btnType="Danger">Switch to {this.state.isSignup ? 'Sign in' : 'Sign up'}
                 </Button>
 
             </div>
