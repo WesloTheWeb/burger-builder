@@ -8,13 +8,20 @@ import thunk from 'redux-thunk';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+// Import of Reducers
 import burgerBuilderReducer from './store/reducers/burgerBuilder';
 import orderReducer from './store/reducers/order';
 import authReducer from './store/reducers/auth';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-// Combines reducers we create into a compiled combined reducer.
+/* ##########################
+Combines reducers we create into a compiled combined reducer.
+- We import reducers with import statement.
+- We set up a rootReducer with the combineReducers() function. It 
+takes in arguments
+
+############################## */
 const rootReducer = combineReducers({
     burgerBuilder: burgerBuilderReducer,
     order: orderReducer,
