@@ -6,6 +6,10 @@ const navigationItems = (props) => (
     <ul className={classes.NavigationItems}>
         <NavigationItem link="/">Burger Builder</NavigationItem>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        <NavigationItem link="/Orders">Orders</NavigationItem>
+>>>>>>> parent of 95cec20... quick fixes
         {props.isAuthenticated ? <NavigationItem link="/orders">Orders</NavigationItem> : null }
 =======
         <NavigationItem link="/Orders">Orders</NavigationItem>
