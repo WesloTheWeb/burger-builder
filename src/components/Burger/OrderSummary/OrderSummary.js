@@ -1,32 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
+
 import Auxillary from '../../../hoc/Auxillary/Auxillary';
 import Button from '../../UI/Button/Button';
 
-const orderSummary = (props) => {
-    const ingredientSummary = Object.keys(props.ingredients)
-        .map(igKey => {
-            return (<li key={igKey} >
-                <span style={{ textTransform: 'capitalize' }}>{igKey}</span>: {props.ingredients[igKey]}
-            </li>
-            );
-        });
+class OrderSummary extends Component {
+    render () {
+        const ingredientSummary = Object.keys( this.props.ingredients )
+            .map( igKey => {
+                return (
+                    <li key={igKey}>
+                        <span style={{ textTransform: 'capitalize' }}>{igKey}</span>: {this.props.ingredients[igKey]}
+                    </li> );
+            } );
 
-    return (
-        <Auxillary>
-            <h3> Your Oder</h3>
-            <p> A delicious burger with the following ingredients:</p>
-            <ul>
-                {ingredientSummary}
-            </ul>
-            <p><strong>Your Total Price comes down to: <span style={{fontSize: '24px' }}>${props.price.toFixed(2)}</span></strong></p>
-            <p>Continue to Checkout?</p>
-            <Button btnType="Danger" clicked={props.purchaseCanceled}>CANCEL</Button>
-            <Button btnType="Success" clicked={props.purchaseContinue} >CONTINUE</Button>
-        </Auxillary>
-    )
+        return (
+            <Auxillary>
+                <h3>Your Order</h3>
+                <p>A delicious burger with the following ingredients:</p>
+                <ul>
+                    {ingredientSummary}
+                </ul>
+                <p><strong>Total Price: {this.props.price.toFixed( 2 )}</strong></p>
+                <p>Continue to Checkout?</p>
+                <Button btnType="Danger" clicked={this.props.purchaseCancelled}>CANCEL</Button>
+                <Button btnType="Success" clicked={this.props.purchaseContinued}>CONTINUE</Button>
+            </Auxillary>
+        );
+    }
+}
 
-};
-
-
-
-export default orderSummary;
+export default OrderSummary;

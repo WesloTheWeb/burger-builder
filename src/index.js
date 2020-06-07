@@ -13,15 +13,15 @@ import burgerBuilderReducer from './store/reducers/burgerBuilder';
 import orderReducer from './store/reducers/order';
 import authReducer from './store/reducers/auth';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
 /* ##########################
 Combines reducers we create into a compiled combined reducer.
 - We import reducers with import statement.
 - We set up a rootReducer with the combineReducers() function. It 
 takes in arguments
-
 ############################## */
+
 const rootReducer = combineReducers({
     burgerBuilder: burgerBuilderReducer,
     order: orderReducer,
@@ -38,8 +38,8 @@ const app = (
             <App />
         </BrowserRouter>
     </Provider>
-
 );
+
 
 ReactDOM.render(app, document.getElementById('root'));
 
