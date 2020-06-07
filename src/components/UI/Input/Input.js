@@ -1,43 +1,31 @@
 import React from 'react';
-import classes from './Input.module.css';
 
-const { Input, Label, Invalid, errorMsg } = classes;
+import classes from './Input.css';
 
-const input = (props) => {
+const input = ( props ) => {
     let inputElement = null;
     const inputClasses = [classes.InputElement];
 
-    let validationError = null;
-    // If its invalid and is currently "touched"
-    if (props.invalid && props.touched) {
-        validationError = <p className={errorMsg}>Please enter {props.shouldValidate.validationText}!</p>;
-        /* This checks the shouldValidate and the validation Text property
-        Remember shouldValidate refers to formElement.config.validation in contactData.js
-        */
-    }
-
-    // Dynamic styling to check if invalid and if touched
     if (props.invalid && props.shouldValidate && props.touched) {
-        inputClasses.push(Invalid);
+        inputClasses.push(classes.Invalid);
     }
 
-    // Switch case for our input. Deals with each type of form i.e input, textarea and select.
-    switch (props.elementType) {
-        case ('input'):
+    switch ( props.elementType ) {
+        case ( 'input' ):
             inputElement = <input
                 className={inputClasses.join(' ')}
                 {...props.elementConfig}
                 value={props.value}
                 onChange={props.changed} />;
             break;
-        case ('textarea'):
+        case ( 'textarea' ):
             inputElement = <textarea
                 className={inputClasses.join(' ')}
                 {...props.elementConfig}
                 value={props.value}
                 onChange={props.changed} />;
             break;
-        case ('select'):
+        case ( 'select' ):
             inputElement = (
                 <select
                     className={inputClasses.join(' ')}
@@ -60,13 +48,12 @@ const input = (props) => {
     }
 
     return (
-        <div className={Input}>
-            <label className={Label}>{props.label}</label>
+        <div className={classes.Input}>
+            <label className={classes.Label}>{props.label}</label>
             {inputElement}
-            {validationError}
         </div>
     );
-};
 
+};
 
 export default input;

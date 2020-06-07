@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Auxillary from '../Auxillary/Auxillary';
-import classes from './layout.module.css';
+import classes from './Layout.css';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 
@@ -12,17 +12,16 @@ class Layout extends Component {
     }
 
     sideDrawerClosedHandler = () => {
-        this.setState({ showSideDrawer: false });
+        this.setState( { showSideDrawer: false } );
     }
 
     sideDrawerToggleHandler = () => {
-        this.setState((prevState) => {
+        this.setState( ( prevState ) => {
             return { showSideDrawer: !prevState.showSideDrawer };
-        });
+        } );
     }
 
-
-    render() {
+    render () {
         return (
             <Auxillary>
                 <Toolbar
@@ -32,20 +31,18 @@ class Layout extends Component {
                     isAuth={this.props.isAuthenticated}
                     open={this.state.showSideDrawer}
                     closed={this.sideDrawerClosedHandler} />
-                <main className={classes.Layout}>
+                <main className={classes.Content}>
                     {this.props.children}
                 </main>
             </Auxillary>
-        );
+        )
     }
 }
 
-// Connecting to a redux state. We can pass this state to a prop.
 const mapStateToProps = state => {
     return {
         isAuthenticated: state.auth.token !== null
     };
-}
+};
 
-
-export default connect(mapStateToProps)(Layout);
+export default connect( mapStateToProps )( Layout );

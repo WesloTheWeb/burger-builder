@@ -1,9 +1,12 @@
 import React from 'react';
-import classes from './Burger.module.css';
+
+import classes from './Burger.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredient';
 
+
 // CSS Destructuring
-const {promptUser} = classes;
+const { promptUser } = classes;
+
 
 const burger = (props) => {
     // Logic behind our ingredients type and quanity.
@@ -12,13 +15,13 @@ const burger = (props) => {
             return [...Array(props.ingredients[igKey])].map((_, i) => {
                 return <BurgerIngredient key={igKey + i} type={igKey} />;
             });
-        } )
-        .reduce((arr,el) => {
+        })
+        .reduce((arr, el) => {
             return arr.concat(el)
         }, []);
-        if ( transformedIngredients.length === 0 ) {
-            transformedIngredients = <p className={promptUser}>Please start adding Ingredients</p>
-        }
+    if (transformedIngredients.length === 0) {
+        transformedIngredients = <p className={promptUser}>Please start adding Ingredients</p>
+    }
 
     // This renders the GUI of the actual burger
     return (
@@ -26,9 +29,8 @@ const burger = (props) => {
             <BurgerIngredient type="bread-top" />
             {transformedIngredients}
             <BurgerIngredient type="bread-bottom" />
-
         </div>
-    )
+    );
 };
 
 export default burger;

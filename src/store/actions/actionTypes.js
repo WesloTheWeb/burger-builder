@@ -1,5 +1,3 @@
-// This file is primarily used for variable declarations to be used for our action types. T
-// o avoid any typos on strings and catch errors.
 export const ADD_INGREDIENT = 'ADD_INGREDIENT';
 export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT';
 export const SET_INGREDIENTS = 'SET_INGREDIENTS';
@@ -18,3 +16,5 @@ export const AUTH_START = 'AUTH_START';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAIL = 'AUTH_FAIL';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+
+export const SET_AUTH_REDIRECT_PATH = 'SET_AUTH_REDIRECT_PATH';
