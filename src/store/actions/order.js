@@ -1,6 +1,5 @@
-/* Holds action creators for submittting an order
+/* Holds actionc reators for submittting an order
 These are just reducers that are able to be used asynchronously and exported */
-
 import * as actionTypes from './actionTypes';
 import axios from '../../axios-orders';
 
@@ -30,6 +29,7 @@ export const purchaseBurger = ( orderData, token ) => {
         dispatch( purchaseBurgerStart() );
         axios.post( '/orders.json?auth=' + token, orderData )
             .then( response => {
+                console.log( response.data );
                 dispatch( purchaseBurgerSuccess( response.data.name, orderData ) );
             } )
             .catch( error => {
@@ -64,11 +64,10 @@ export const fetchOrdersStart = () => {
     };
 };
 
-export const fetchOrders = (token, userId) => {
+export const fetchOrders = (token) => {
     return dispatch => {
         dispatch(fetchOrdersStart());
-        const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo="' + userId + '"';
-        axios.get( '/orders.json' + queryParams)
+        axios.get( '/orders.json?auth=' + token)
             .then( res => {
                 const fetchedOrders = [];
                 for ( let key in res.data ) {

@@ -5,7 +5,11 @@ import NavigationItem from './NavigationItem/NavigationItem';
 const navigationItems = (props) => (
     <ul className={classes.NavigationItems}>
         <NavigationItem link="/">Burger Builder</NavigationItem>
+<<<<<<< HEAD
         {props.isAuthenticated ? <NavigationItem link="/orders">Orders</NavigationItem> : null }
+=======
+        <NavigationItem link="/Orders">Orders</NavigationItem>
+>>>>>>> parent of b1a8642... Authentication tokens
         {!props.isAuthenticated 
             ? <NavigationItem link="/Auth">Authenticate</NavigationItem>
             : <NavigationItem link="/logout">Logout</NavigationItem>

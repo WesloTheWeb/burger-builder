@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
@@ -44,9 +43,24 @@ class Auth extends Component {
         isSignup: true
     }
 
+<<<<<<< HEAD
     componentDidMount () {
         if ( !this.props.buildingBurger && this.props.authRedirectPath !== '/' ) {
             this.props.onSetAuthRedirectPath();
+=======
+    checkValidity(value, rules) {
+        let isValid = true;
+        if (!rules) {
+            return true;
+        }
+
+        if (rules.required) {
+            isValid = value.trim() !== '' && isValid;
+        }
+
+        if (rules.minLength) {
+            isValid = value.length >= rules.minLength && isValid
+>>>>>>> parent of b1a8642... Authentication tokens
         }
     }
 
@@ -105,14 +119,16 @@ class Auth extends Component {
             );
         }
 
+<<<<<<< HEAD
         let authRedirect = null;
         if ( this.props.isAuthenticated ) {
             authRedirect = <Redirect to={this.props.authRedirectPath} />
         }
 
+=======
+>>>>>>> parent of b1a8642... Authentication tokens
         return (
             <div className={classes.Auth}>
-                {authRedirect}
                 {errorMessage}
                 <form onSubmit={this.submitHandler}>
                     {form}
@@ -129,17 +145,18 @@ class Auth extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
-        error: state.auth.error,
-        isAuthenticated: state.auth.token !== null,
-        buildingBurger: state.burgerBuilder.building,
-        authRedirectPath: state.auth.authRedirectPath
+        error: state.auth.error
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+<<<<<<< HEAD
         onAuth: ( email, password, isSignup ) => dispatch( actions.auth( email, password, isSignup ) ),
         onSetAuthRedirectPath: () => dispatch( actions.setAuthRedirectPath( '/' ) )
+=======
+        onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup))
+>>>>>>> parent of b1a8642... Authentication tokens
     };
 };
 
